@@ -1,0 +1,61 @@
+:root {
+    --bor-rad: 5px;
+    --bor-width: 5px;
+    --accent-color: #00B2EA;
+}
+
+body {
+    background-color: black;
+}
+
+header {
+    position: relative;
+    border-style: solid;
+    border-width: var(--bor-width);
+    border-color: var(--accent-color);
+    border-radius: var(--bor-rad);
+}
+
+header h1 {
+    color: white;
+    text-align: center;
+}
+
+header p {
+    color: white;
+    text-align: center;
+}
+ header a {
+    position: absolute;
+        bottom: -5px;
+        left: -5px;
+    padding: 10px;
+    color: black;
+    background-color: var(--accent-color);
+    border-radius: var(--bor-rad);
+    font-weight: bolder;
+}
+
+.play-field {
+    margin: 50px;
+    color: white;
+    border-style: solid;
+    border-width: var(--bor-width);
+    border-color: var(--accent-color);
+    border-radius: var(--bor-rad);
+}
+
+footer {
+    position: fixed;
+        bottom: 0;
+    
+    border-style: solid;
+    border-width: var(--bor-width);
+    border-color: var(--accent-color);
+    border-radius: var(--bor-rad);
+    text-align: center;
+}
+
+footer h2 {
+    color: white;
+}
