@@ -38,7 +38,12 @@ header a {
 }
 
 .play-field {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
     margin: 50px;
+    padding: 0 50px 0 50px;
     color: white;
     border-style: solid;
     border-width: var(--bor-width);
@@ -47,10 +52,23 @@ header a {
 }
 
 .play-field h2 {
+    padding: 10px;
     color: white;
 }
 
-button {
+.timer {
+}
+
+.question {
+    padding: 10px;
+    font-size: larger;
+    text-align: center;
+    font-weight: bold;
+}
+
+.answer {
+    justify-self:baseline;
+    padding: 20px;
 }
 
 footer {
