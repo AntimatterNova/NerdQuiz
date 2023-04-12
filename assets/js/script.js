@@ -29,25 +29,25 @@ var curQuestion = 0;
 var secLeft = 60;
 var score = 0;
 
-function main() {
-  questionBox.textContent = questionList[0].questionText;
+// function main() {
+//   questionBox.textContent = questionList[0].questionText;
 
-  for (var i = 0; i < questionList[0].choices.length; i++) {
-    var genButton = document.createElement('button');
-    genButton.textContent = questionList[0].choices[i];
-    answerBox.append(genButton);
-  };
+//   for (var i = 0; i < questionList[0].choices.length; i++) {
+//     var genButton = document.createElement('button');
+//     genButton.textContent = questionList[0].choices[i];
+//     answerBox.append(genButton);
+//   };
 
-  if (genButton.textContent = questionList[].trueAns) {
-    score + 10;
-  } else {
-    secLeft - 5;
-  };
-  console.log(secLeft);
-};
+//   if (genButton.textContent = questionList[].trueAns) {
+//     score + 10;
+//   } else {
+//     secLeft - 5;
+//   };
+//   console.log(secLeft);
+// };
 
-main();
-console.log('test');
+// main();
+// console.log('test');
 
 
 startBtn.addEventListener('click', function(event) {
@@ -59,10 +59,36 @@ startBtn.addEventListener('click', function(event) {
     secLeft--;
     timeEl.textContent = 'Time left: ' + secLeft;
 
-    if(secondsLeft === 0) {
+    if(secLeft === 0) {
       // Stops execution of action at set interval
       clearInterval(timerInterval);
       // Calls function to create and append image
       };
   }, 1000);
+
+  function main() {
+    questionBox.textContent = questionList[0].questionText;
+    
+    var x = curQuestion;
+    var choice = document.querySelector('button');
+
+    for (var i = 0; i < questionList[x].choices.length; i++) {
+      var genButton = document.createElement('button');
+      genButton.textContent = questionList[x].choices[i];
+      answerBox.append(genButton);
+    };
+  
+    // if (choice.contains(questionList[x].trueAns)) {
+    //   score + 10;
+    // } else {
+    //   secLeft - 5;
+    // };
+
+    // if (curQuestion <= questionList.length) {
+    //   curQuestion++;
+    // };
+  };
+
+  main();
+  console.log('test');
 });
