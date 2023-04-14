@@ -5,8 +5,8 @@ var questionList = [{
   },
   {
     questionText: '',
-    choices: [],
-    trueAns: '',
+    choices: ['sakdhgf', 'ASDHGF', 'kjahsdgf'],
+    trueAns: 'ASDHGF',
   },
   {
     questionText: '',
@@ -25,30 +25,10 @@ var gameField = document.querySelector('.play-field');
 var startBtn = document.querySelector('.startBtn');
 var questionBox = document.querySelector('.question');
 var answerBox = document.querySelector('.answers');
+var scoreBox = document.querySelector('.score');
 var curQuestion = 0;
 var secLeft = 60;
 var score = 0;
-
-// function main() {
-//   questionBox.textContent = questionList[0].questionText;
-
-//   for (var i = 0; i < questionList[0].choices.length; i++) {
-//     var genButton = document.createElement('button');
-//     genButton.textContent = questionList[0].choices[i];
-//     answerBox.append(genButton);
-//   };
-
-//   if (genButton.textContent = questionList[].trueAns) {
-//     score + 10;
-//   } else {
-//     secLeft - 5;
-//   };
-//   console.log(secLeft);
-// };
-
-// main();
-// console.log('test');
-
 
 startBtn.addEventListener('click', function(event) {
   console.log('Game started');
@@ -67,26 +47,41 @@ startBtn.addEventListener('click', function(event) {
   }, 1000);
 
   function main() {
-    questionBox.textContent = questionList[0].questionText;
-    
-    var x = curQuestion;
-    var choice = document.querySelector('button');
+    displayQuestion(curQuestion);
+  };
 
-    for (var i = 0; i < questionList[x].choices.length; i++) {
-      var genButton = document.createElement('button');
-      genButton.textContent = questionList[x].choices[i];
-      answerBox.append(genButton);
+  function displayQuestion(curQuestion) {
+    //checks for pre-existing buttons
+    var prevBtns = document.querySelectorAll('.choiceBtn');
+    if (prevBtns) {
+      for (var j = 0; j < prevBtns.length; j++) {
+        prevBtns[j].remove();
+      };
     };
-  
-    // if (choice.contains(questionList[x].trueAns)) {
-    //   score + 10;
-    // } else {
-    //   secLeft - 5;
-    // };
 
-    // if (curQuestion <= questionList.length) {
-    //   curQuestion++;
-    // };
+    questionBox.textContent = questionList[curQuestion].questionText;
+    
+    for (var i = 0; i < questionList[curQuestion].choices.length; i++) {
+      var choiceBtn = document.createElement('button');
+      choiceBtn.classList.add('choiceBtn');
+      choiceBtn.textContent = questionList[curQuestion].choices[i];
+      answerBox.append(choiceBtn);
+
+      choiceBtn.addEventListener('click', function(e) {
+        var El = e.target;
+        if (El.textContent === questionList[curQuestion].trueAns) {
+          score += 10;
+        } else {
+          secLeft -= 5;
+          return
+        };
+  
+        if (curQuestion < questionList.length) {
+          curQuestion++;
+          displayQuestion(curQuestion);
+        };
+      });
+    };
   };
 
   main();
