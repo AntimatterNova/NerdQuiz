@@ -71,6 +71,11 @@ header a {
     padding: 20px;
 }
 
+form {
+    display: none;
+    text-align: center;
+}
+
 footer {
     position: fixed;
         bottom: 0;

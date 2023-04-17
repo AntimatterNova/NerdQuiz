@@ -4,19 +4,19 @@ var questionList = [{
     trueAns: 'It assigns a value to a name',
   },
   {
-    questionText: '',
-    choices: ['sakdhgf', 'ASDHGF', 'kjahsdgf'],
-    trueAns: 'ASDHGF',
+    questionText: '1 A',
+    choices: ['A', 'B', 'C'],
+    trueAns: 'A',
   },
   {
-    questionText: '',
-    choices: [],
-    trueAns: '',
+    questionText: '2 B',
+    choices: ['A', 'B', 'C'],
+    trueAns: 'B',
   },
   {
-    questionText: '',
-    choices: [],
-    trueAns: '',
+    questionText: '3 C',
+    choices: ['A', 'B', 'C'], 
+    trueAns: 'C',
   },
 ];
 
@@ -26,8 +26,10 @@ var startBtn = document.querySelector('.startBtn');
 var questionBox = document.querySelector('.question');
 var answerBox = document.querySelector('.answers');
 var scoreBox = document.querySelector('.score');
+var inputField = document.querySelector('.inputField');
+var initialsInput = document.querySelector('#initialsInput');
 var curQuestion = 0;
-var secLeft = 60;
+var secLeft = 120;
 var score = 0;
 
 startBtn.addEventListener('click', function(event) {
@@ -37,12 +39,13 @@ startBtn.addEventListener('click', function(event) {
   var timerInterval = setInterval(function() {
 
     secLeft--;
-    timeEl.textContent = 'Time left: ' + secLeft;
+    timeEl.textContent = '[Time left: ' + secLeft + ']👾👾👾[Score: ' + score + ']';
 
-    if(secLeft === 0) {
+    if (secLeft === 0) {
       // Stops execution of action at set interval
       clearInterval(timerInterval);
-      // Calls function to create and append image
+      gameOvr();
+
       };
   }, 1000);
 
@@ -72,16 +75,35 @@ startBtn.addEventListener('click', function(event) {
         if (El.textContent === questionList[curQuestion].trueAns) {
           score += 10;
         } else {
-          secLeft -= 5;
+          secLeft -= 10;
           return
         };
   
         if (curQuestion < questionList.length) {
+          clearInterval(timerInterval);
+          gameOvr();
+        };
+
+        if (curQuestion < questionList.length) {
           curQuestion++;
           displayQuestion(curQuestion);
+        } else {
+          console.log(out);
         };
       });
     };
+  };
+
+  function gameOvr() {
+    timeEl.remove();
+    scoreBox.remove();
+    answerBox.remove();
+
+    inputField.style.display = 'block';
+
+    score -= secLeft;
+    localStorage.setItem('score', score);
+    questionBox.textContent = 'Final Score: ' + score;
   };
 
   main();
