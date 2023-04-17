@@ -71,6 +71,11 @@ header a {
     padding: 20px;
 }
 
+.score-board {
+    color: white;
+    text-align: center;
+}
+
 form {
     display: none;
     text-align: center;

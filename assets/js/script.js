@@ -4,19 +4,19 @@ var questionList = [{
     trueAns: 'It assigns a value to a name',
   },
   {
-    questionText: '1 A',
-    choices: ['A', 'B', 'C'],
-    trueAns: 'A',
+    questionText: 'What is the maximum amount of values that can be stored in an array?',
+    choices: ['Only five values', 'Less than one million', 'More than one billion'],
+    trueAns: 'More than one billion',
   },
   {
-    questionText: '2 B',
-    choices: ['A', 'B', 'C'],
-    trueAns: 'B',
+    questionText: 'How can you select an HTML element with JavaScript?',
+    choices: ['.addEventListener', '.querySelector', '.log'],
+    trueAns: '.querySelector',
   },
   {
-    questionText: '3 C',
-    choices: ['A', 'B', 'C'], 
-    trueAns: 'C',
+    questionText: 'Which of the options below will subtract 10 from a var?',
+    choices: ['var - 10', 'var -- 10', 'var -= 10'], 
+    trueAns: 'var -= 10',
   },
 ];
 
@@ -27,9 +27,10 @@ var questionBox = document.querySelector('.question');
 var answerBox = document.querySelector('.answers');
 var scoreBox = document.querySelector('.score');
 var inputField = document.querySelector('.inputField');
-var initialsInput = document.querySelector('#initialsInput');
+var initialInput = document.querySelector('#initialsInput').textContent;
+var highScores = [];
 var curQuestion = 0;
-var secLeft = 120;
+var secLeft = 60;
 var score = 0;
 
 startBtn.addEventListener('click', function(event) {
@@ -37,22 +38,22 @@ startBtn.addEventListener('click', function(event) {
   startBtn.remove();
   
   var timerInterval = setInterval(function() {
-
+    
     secLeft--;
     timeEl.textContent = '[Time left: ' + secLeft + ']👾👾👾[Score: ' + score + ']';
-
+    
     if (secLeft === 0) {
       // Stops execution of action at set interval
       clearInterval(timerInterval);
       gameOvr();
-
-      };
+      
+    };
   }, 1000);
-
+  
   function main() {
     displayQuestion(curQuestion);
   };
-
+  
   function displayQuestion(curQuestion) {
     //checks for pre-existing buttons
     var prevBtns = document.querySelectorAll('.choiceBtn');
@@ -60,8 +61,12 @@ startBtn.addEventListener('click', function(event) {
       for (var j = 0; j < prevBtns.length; j++) {
         prevBtns[j].remove();
       };
+      if (curQuestion >= questionList.length) {
+        clearInterval(timerInterval);
+        gameOvr();
+      };
     };
-
+    
     questionBox.textContent = questionList[curQuestion].questionText;
     
     for (var i = 0; i < questionList[curQuestion].choices.length; i++) {
@@ -69,7 +74,7 @@ startBtn.addEventListener('click', function(event) {
       choiceBtn.classList.add('choiceBtn');
       choiceBtn.textContent = questionList[curQuestion].choices[i];
       answerBox.append(choiceBtn);
-
+      
       choiceBtn.addEventListener('click', function(e) {
         var El = e.target;
         if (El.textContent === questionList[curQuestion].trueAns) {
@@ -78,12 +83,8 @@ startBtn.addEventListener('click', function(event) {
           secLeft -= 10;
           return
         };
-  
-        if (curQuestion < questionList.length) {
-          clearInterval(timerInterval);
-          gameOvr();
-        };
-
+        
+        
         if (curQuestion < questionList.length) {
           curQuestion++;
           displayQuestion(curQuestion);
@@ -93,19 +94,33 @@ startBtn.addEventListener('click', function(event) {
       });
     };
   };
-
+  
   function gameOvr() {
     timeEl.remove();
     scoreBox.remove();
     answerBox.remove();
-
+    
     inputField.style.display = 'block';
-
-    score -= secLeft;
+    
+    score += secLeft;
     localStorage.setItem('score', score);
     questionBox.textContent = 'Final Score: ' + score;
-  };
+    
+    inputField.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var finalScore = {
+        name: e.target[0].value,
+        score,
+      };
 
+      highScores.push(finalScore);
+      window.localStorage.setItem('score', JSON.stringify(highScores));
+      console.log(finalScore);
+    });
+  };
+  
   main();
   console.log('test');
 });
+
+// if (window.localStorage has a score) {};
