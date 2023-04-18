@@ -27,11 +27,12 @@ var questionBox = document.querySelector('.question');
 var answerBox = document.querySelector('.answers');
 var scoreBox = document.querySelector('.score');
 var inputField = document.querySelector('.inputField');
-var initialInput = document.querySelector('#initialsInput').textContent;
+// var initialInput = document.querySelector('#initialsInput');
 var highScores = [];
 var curQuestion = 0;
 var secLeft = 60;
 var score = 0;
+
 
 startBtn.addEventListener('click', function(event) {
   console.log('Game started');
@@ -106,7 +107,6 @@ startBtn.addEventListener('click', function(event) {
     questionBox.textContent = 'Final Score: ' + score;
     
     inputField.addEventListener('submit', function(e) {
-      e.preventDefault();
       var finalScore = {
         name: e.target[0].value,
         score,
@@ -119,7 +119,30 @@ startBtn.addEventListener('click', function(event) {
     });
   };
   
+  
   main();
   console.log('test');
 });
-// if (window.localStorage) {};
+
+// function viewScores() {
+//   var scoreboard = document.querySelector('.score-board');
+//   var score = JSON.parse(localStorage.getItem('score'));
+
+//   for (var i = 0; i < score.length; i++) {
+//     var scoreLi = document.createElement('li');
+
+//     scoreLi.textContent = score[i].name + '-' + score[i].score;
+//     console.log(score[i].name);
+//     scoreboard.appendChild(scoreLi);
+//   }
+// }
+
+function init() {
+  highScores = JSON.parse(localStorage.getItem('score'));
+
+  if (highScores === null) {
+    highScores = [];
+  };
+  console.log(highScores);
+}
+init();
