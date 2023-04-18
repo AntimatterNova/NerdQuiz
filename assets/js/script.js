@@ -103,7 +103,6 @@ startBtn.addEventListener('click', function(event) {
     inputField.style.display = 'block';
     
     score += secLeft;
-    localStorage.setItem('score', score);
     questionBox.textContent = 'Final Score: ' + score;
     
     inputField.addEventListener('submit', function(e) {
@@ -116,11 +115,11 @@ startBtn.addEventListener('click', function(event) {
       highScores.push(finalScore);
       window.localStorage.setItem('score', JSON.stringify(highScores));
       console.log(finalScore);
+      console.log(highScores);
     });
   };
   
   main();
   console.log('test');
 });
-
-// if (window.localStorage has a score) {};
+// if (window.localStorage) {};
