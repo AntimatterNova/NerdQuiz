@@ -1,3 +1,4 @@
+//everything in this file handles rendering the score on the scoreboard.html page
 var scoreboard = document.querySelector('.score-board');
 var score = JSON.parse(localStorage.getItem('score'));
 var clrBtn = document.querySelector('#clrScore');
